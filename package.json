@@ -9,7 +9,7 @@
     "lint": "npm run prettier -- --check && npm run swiftlint -- lint",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
-    "build": "npm run clean && tsc && rollup -c rollup.config.js",
+    "build": "npm run clean && ./node_modules/typescript/bin/tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
@@ -38,7 +38,9 @@
     "dist/",
     "ios/",
     "android/",
-    "CapacitorMarketingCloud.podspec"
+    "CapacitorMarketingCloud.podspec",
+    "rollup.config.js",
+    "tsconfig.json"
   ],
   "keywords": [
     "capacitor",
