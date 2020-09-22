@@ -1,6 +1,6 @@
 {
   "name": "capacitor-marketing-cloud",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A capacitor plugin for Marketing Cloud mobile push SDK",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
@@ -9,11 +9,10 @@
     "lint": "npm run prettier -- --check && npm run swiftlint -- lint",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
-    "build": "npm run clean && ./node_modules/typescript/bin/tsc && rollup -c rollup.config.js",
+    "build": "npm run clean && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build",
-    "postinstall": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "author": "",
   "license": "MIT",
@@ -38,9 +37,7 @@
     "dist/",
     "ios/",
     "android/",
-    "CapacitorMarketingCloud.podspec",
-    "rollup.config.js",
-    "tsconfig.json"
+    "CapacitorMarketingCloud.podspec"
   ],
   "keywords": [
     "capacitor",
