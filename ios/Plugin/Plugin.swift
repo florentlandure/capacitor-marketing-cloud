@@ -10,7 +10,7 @@ import MarketingCloudSDK
 public class SLMMarketingCloud: CAPPlugin {
     
     @objc func isPushEnabled(_ call: CAPPluginCall) {
-        call.success([
+        call.resolve([
             "value": MarketingCloudSDK.sharedInstance()
                 .sfmc_pushEnabled()
         ])
@@ -19,23 +19,23 @@ public class SLMMarketingCloud: CAPPlugin {
     @objc func enablePush(_ call: CAPPluginCall) {
         UIApplication.shared.registerForRemoteNotifications()
         MarketingCloudSDK.sharedInstance().sfmc_setPushEnabled(true)
-        call.success()
+        call.resolve()
     }
     
     @objc func disablePush(_ call: CAPPluginCall) {
         UIApplication.shared.unregisterForRemoteNotifications()
         MarketingCloudSDK.sharedInstance().sfmc_setPushEnabled(false)
-        call.success()
+        call.resolve()
     }
     
     @objc func getSystemToken(_ call: CAPPluginCall) {
         let device_token = MarketingCloudSDK.sharedInstance().sfmc_deviceToken()
-        call.success([ "value": device_token ?? "" ])
+        call.resolve([ "value": device_token ?? "" ])
     }
     
     @objc func getAttributes(_ call: CAPPluginCall) {
         let attributes = MarketingCloudSDK.sharedInstance().sfmc_attributes() ?? [:]
-        call.success([ "value": attributes ])
+        call.resolve([ "value": attributes ])
     }
     
     @objc func setAttribute(_ call: CAPPluginCall) {
@@ -44,10 +44,10 @@ public class SLMMarketingCloud: CAPPlugin {
         
         if (key.count > 0) {
             let is_set = MarketingCloudSDK.sharedInstance().sfmc_setAttributeNamed(key, value: value)
-            call.success([ "value": is_set ])
+            call.resolve([ "value": is_set ])
         }
         else {
-            call.error("No key was provided")
+            call.reject("No key was provided")
         }
     }
     
@@ -56,9 +56,9 @@ public class SLMMarketingCloud: CAPPlugin {
         
         if (array.count > 0) {
             let attributes = MarketingCloudSDK.sharedInstance().sfmc_setAttributes(array) ?? [:]
-            call.success(["value": attributes ])
+            call.resolve(["value": attributes ])
         } else {
-            call.error("No attibutes were provided")
+            call.reject("No attibutes were provided")
         }
     }
     
@@ -67,10 +67,10 @@ public class SLMMarketingCloud: CAPPlugin {
         
         if (key.count > 0) {
             let is_cleared = MarketingCloudSDK.sharedInstance().sfmc_clearAttributeNamed(key)
-            call.success(["value": is_cleared])
+            call.resolve(["value": is_cleared])
         }
         else {
-            call.error("No key was provided")
+            call.reject("No key was provided")
         }
     }
     
@@ -79,10 +79,10 @@ public class SLMMarketingCloud: CAPPlugin {
         
         if (tag.count > 0) {
             let is_added = MarketingCloudSDK.sharedInstance().sfmc_addTag(tag)
-            call.success([ "value": is_added ])
+            call.resolve([ "value": is_added ])
         }
         else {
-            call.error("Tag is empty")
+            call.reject("Tag is empty")
         }
     }
     
@@ -91,16 +91,16 @@ public class SLMMarketingCloud: CAPPlugin {
         
         if (tag.count > 0) {
             let is_removed = MarketingCloudSDK.sharedInstance().sfmc_removeTag(tag)
-            call.success([ "value": is_removed ])
+            call.resolve([ "value": is_removed ])
         }
         else {
-            call.error("Tag is empty")
+            call.reject("Tag is empty")
         }
     }
     
     @objc func getTags(_ call: CAPPluginCall) {
         let tags = MarketingCloudSDK.sharedInstance().sfmc_tags() ?? []
-        call.success([ "value": tags ])
+        call.resolve([ "value": tags ])
     }
     
     @objc func setContactKey(_ call: CAPPluginCall) {
@@ -108,26 +108,26 @@ public class SLMMarketingCloud: CAPPlugin {
         
         if (contact_key.count > 0) {
             let is_set = MarketingCloudSDK.sharedInstance().sfmc_setContactKey(contact_key)
-            call.success([ "value": is_set ])
+            call.resolve([ "value": is_set ])
         }
         else {
-            call.error("Contact key is empty")
+            call.reject("Contact key is empty")
         }
     }
     
     @objc func getContactKey(_ call: CAPPluginCall) {
         let contact_key = MarketingCloudSDK.sharedInstance().sfmc_contactKey() ?? ""
-        call.success([ "value": contact_key ])
+        call.resolve([ "value": contact_key ])
     }
     
     @objc func enableVerboseLogging(_ call: CAPPluginCall) {
         MarketingCloudSDK.sharedInstance().sfmc_setDebugLoggingEnabled(true)
-        call.success()
+        call.resolve()
     }
     
     @objc func disableVerboseLogging(_ call: CAPPluginCall) {
         MarketingCloudSDK.sharedInstance().sfmc_setDebugLoggingEnabled(false)
-        call.success()
+        call.resolve()
     }
     
     @objc func setOnNotificationOpenedListener(_ call: CAPPluginCall) {
@@ -140,7 +140,7 @@ public class SLMMarketingCloud: CAPPlugin {
     
     @objc func logSdkState(_ call: CAPPluginCall) {
         let state = MarketingCloudSDK.sharedInstance().sfmc_getSDKState() ?? ""
-        call.success([ "value": state ])
+        call.resolve([ "value": state ])
     }
     
 }
