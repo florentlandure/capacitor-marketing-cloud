@@ -14,9 +14,9 @@ export class SLMMarketingCloudWeb
       platforms: ['web'],
     });
   }
-  async isPushEnabled(): Promise<boolean> {
+  async isPushEnabled(): Promise<{ value: boolean }> {
     console.log('isPushEnabled');
-    return false;
+    return { value: false };
   }
 
   async enablePush(): Promise<void> {
@@ -29,50 +29,62 @@ export class SLMMarketingCloudWeb
     return;
   }
 
-  async getSystemToken(): Promise<string> {
+  async getSystemToken(): Promise<{ value: string }> {
     console.log('getSystemToken');
-    return '';
+    return { value: '' };
   }
 
-  async getAttributes(): Promise<{ [key: string]: string }> {
+  async getAttributes(): Promise<{ value: { [key: string]: string } }> {
     console.log('getAttributes');
-    return {};
+    return { value: {} };
   }
 
   async setAttribute(options: {
     key: string;
     value: string;
-  }): Promise<boolean> {
+  }): Promise<{ value: boolean }> {
     console.log('setAttribute', options);
-    return true;
+    return { value: true };
   }
 
-  async clearAttribute(options: { key: string }): Promise<boolean> {
+  async setAttributes(options: {
+    attributes: Array<{
+      key: string;
+      value: string;
+    }>;
+  }): Promise<{
+    value: { [key: string]: string };
+  }> {
+    console.log('setAttributes', options);
+    return { value: {} };
+  }
+
+  async clearAttribute(options: { key: string }): Promise<{ value: boolean }> {
     console.log('clearAttribute', options);
-    return true;
+    return { value: true };
   }
 
-  async addTag(options: { value: string }): Promise<boolean> {
+  async addTag(options: { tag: string }): Promise<{ value: boolean }> {
     console.log('addTag', options);
-    return true;
+    return { value: true };
   }
 
-  async removeTag(options: { tag: string }): Promise<boolean> {
+  async removeTag(options: { tag: string }): Promise<{ value: boolean }> {
     console.log('removeTag', options);
-    return true;
+    return { value: true };
   }
 
-  async getTags(): Promise<string[]> {
-    return [];
+  async getTags(): Promise<{ value: string[] }> {
+    return { value: [] };
   }
 
-  async setContactKey(options: { value: string }): Promise<boolean> {
+  async setContactKey(options: { value: string }): Promise<{ value: boolean }> {
     console.log('setContactKey', options);
-    return true;
+    return { value: true };
   }
 
-  async getContactKey(): Promise<string> {
-    return '';
+  async getContactKey(): Promise<{ value: string }> {
+    return { value: '' };
   }
 
   async enableVerboseLogging(): Promise<void> {
@@ -99,9 +111,9 @@ export class SLMMarketingCloudWeb
     return;
   }
 
-  async logSdkState(): Promise<Object> {
+  async logSdkState(): Promise<{ value: string }> {
     console.log('logSdkState');
-    return {};
+    return { value: '' };
   }
 }
 

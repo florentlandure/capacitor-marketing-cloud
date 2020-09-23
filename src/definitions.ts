@@ -27,7 +27,7 @@ export interface SLMMarketingCloudPlugin {
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/messages/push/PushMessageManager.html#isPushEnabled()|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_pushEnabled|iOS Docs}
    */
-  isPushEnabled(): Promise<boolean>;
+  isPushEnabled(): Promise<{ value: boolean }>;
 
   /**
    * Enables push messaging in the native Marketing Cloud SDK.
@@ -50,14 +50,14 @@ export interface SLMMarketingCloudPlugin {
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/messages/push/PushMessageManager.html#getPushToken()|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_deviceToken|iOS Docs}
    */
-  getSystemToken(): Promise<string>;
+  getSystemToken(): Promise<{ value: string }>;
 
   /**
    * Returns the maps of attributes set in the registration.
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.html#getAttributes()|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_attributes|iOS Docs}
    */
-  getAttributes(): Promise<{ [key: string]: string }>;
+  getAttributes(): Promise<{ value: { [key: string]: string } }>;
 
   /**
    * Sets the value of an attribute in the registration.
@@ -66,9 +66,30 @@ export interface SLMMarketingCloudPlugin {
    * @param  {string} options.value - The value of the `key` attribute to be set in
    *     the registration.
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.Editor.html#setAttribute(java.lang.String,%20java.lang.String)|Android Docs}
-   * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_setAttributeNamed:value:|iOS Docs}
+   * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_setAttributes:|iOS Docs}
    */
-  setAttribute(options: { key: string; value: string }): Promise<boolean>;
+  setAttribute(options: {
+    key: string;
+    value: string;
+  }): Promise<{ value: boolean }>;
+
+  /**
+   * Sets the value of an attribute in the registration.
+   * @param  {string} options.key - The name of the attribute to be set in the
+   *     registration.
+   * @param  {string} options.value - The value of the `key` attribute to be set in
+   *     the registration.
+   * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.Editor.html#setAttribute(java.lang.String,%20java.lang.String)|Android Docs}
+   * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_setAttributes:|iOS Docs}
+   */
+  setAttributes(options: {
+    attributes: Array<{
+      key: string;
+      value: string;
+    }>;
+  }): Promise<{
+    value: { [key: string]: string };
+  }>;
 
   /**
    * Clears the value of an attribute in the registration.
@@ -77,7 +98,7 @@ export interface SLMMarketingCloudPlugin {
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.Editor.html#clearAttribute(java.lang.String)|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_clearAttributeNamed:|iOS Docs}
    */
-  clearAttribute(options: { key: string }): Promise<boolean>;
+  clearAttribute(options: { key: string }): Promise<{ value: boolean }>;
 
   /**
    * @param  {string} options.value - The tag to be added to the list of tags in the
@@ -85,7 +106,7 @@ export interface SLMMarketingCloudPlugin {
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.Editor.html#addTag(java.lang.String)|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_addTag:|iOS Docs}
    */
-  addTag(options: { value: string }): Promise<boolean>;
+  addTag(options: { tag: string }): Promise<{ value: boolean }>;
 
   /**
    * @param  {string} options.tag - The tag to be removed from the list of tags in the
@@ -93,14 +114,14 @@ export interface SLMMarketingCloudPlugin {
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.Editor.html#removeTag(java.lang.String)|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_removeTag:|iOS Docs}
    */
-  removeTag(options: { tag: string }): Promise<boolean>;
+  removeTag(options: { tag: string }): Promise<{ value: boolean }>;
 
   /**
    * Returns the tags currently set on the device.
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.html#getTags()|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_tags|iOS Docs}
    */
-  getTags(): Promise<string[]>;
+  getTags(): Promise<{ value: string[] }>;
 
   /**
    * Sets the contact key for the device's user.
@@ -109,14 +130,14 @@ export interface SLMMarketingCloudPlugin {
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.Editor.html#setContactKey(java.lang.String)|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_setContactKey:|iOS Docs}
    */
-  setContactKey(options: { value: string }): Promise<boolean>;
+  setContactKey(options: { value: string }): Promise<{ value: boolean }>;
 
   /**
    * Returns the contact key currently set on the device.
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/javadocs/6.0/reference/com/salesforce/marketingcloud/registration/RegistrationManager.html#getContactKey()|Android Docs}
    * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/appledoc/Classes/MarketingCloudSDK.html#//api/name/sfmc_contactKey|iOS Docs}
    */
-  getContactKey(): Promise<string>;
+  getContactKey(): Promise<{ value: string }>;
 
   /**
    * Enables verbose logging within the native Marketing Cloud SDK.
@@ -170,5 +191,5 @@ export interface SLMMarketingCloudPlugin {
    *
    * @since 6.3.1
    */
-  logSdkState(): Promise<Object>;
+  logSdkState(): Promise<{ value: string }>;
 }
