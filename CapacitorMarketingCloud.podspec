@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
   s.ios.deployment_target  = '11.0'
   s.dependency 'Capacitor'
-  s.dependency 'MarketingCloudSDK'
+  s.dependency 'MarketingCloudSDK', '~> 7.2'
   s.swift_version = '5.1'
 end
