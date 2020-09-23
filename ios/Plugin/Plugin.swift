@@ -47,7 +47,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let isSet = MarketingCloudSDK.sharedInstance().sfmc_setAttributeNamed(key, value: value)
             call.resolve([ "value": isSet ])
         } else {
-            call.reject("No key was provided")
+            call.reject("setAttribute - No key was provided")
         }
     }
 
@@ -58,7 +58,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let attributes = MarketingCloudSDK.sharedInstance().sfmc_setAttributes(array) ?? [:]
             call.resolve(["value": attributes ])
         } else {
-            call.reject("No attibutes were provided")
+            call.reject("etAttributes - No attibutes were provided")
         }
     }
 
@@ -69,7 +69,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let isCleared = MarketingCloudSDK.sharedInstance().sfmc_clearAttributeNamed(key)
             call.resolve(["value": isCleared])
         } else {
-            call.reject("No key was provided")
+            call.reject("clearAttribute - No key was provided")
         }
     }
 
@@ -80,7 +80,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let isAdded = MarketingCloudSDK.sharedInstance().sfmc_addTag(tag)
             call.resolve([ "value": isAdded ])
         } else {
-            call.reject("Tag is empty")
+            call.reject("addTag - Tag is empty")
         }
     }
 
@@ -91,7 +91,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let isRemoved = MarketingCloudSDK.sharedInstance().sfmc_removeTag(tag)
             call.resolve([ "value": isRemoved ])
         } else {
-            call.reject("Tag is empty")
+            call.reject("removeTag - Tag is empty")
         }
     }
 
@@ -107,7 +107,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let isSet = MarketingCloudSDK.sharedInstance().sfmc_setContactKey(contactKey)
             call.resolve([ "value": isSet ])
         } else {
-            call.reject("Contact key is empty")
+            call.reject("setContactKey - Contact key is empty")
         }
     }
 
