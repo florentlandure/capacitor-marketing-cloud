@@ -22,4 +22,4 @@ CAP_PLUGIN(SLMMarketingCloud, "SLMMarketingCloud",
            CAP_PLUGIN_METHOD(setOnNotificationOpenedListener, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(setOnUrlActionListener, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(logSdkState, CAPPluginReturnPromise);
-)
+           )

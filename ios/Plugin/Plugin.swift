@@ -10,9 +10,10 @@ import MarketingCloudSDK
 public class SLMMarketingCloud: CAPPlugin {
     
     @objc func isPushEnabled(_ call: CAPPluginCall) {
+        let is_enabled = MarketingCloudSDK.sharedInstance()
+                .sfmc_pushEnabled() ?? false
         call.resolve([
-            "value": MarketingCloudSDK.sharedInstance()
-                .sfmc_pushEnabled()
+            "value": is_enabled
         ])
     }
     
