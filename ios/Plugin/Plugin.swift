@@ -11,20 +11,24 @@ public class SLMMarketingCloud: CAPPlugin {
 
     @objc func isPushEnabled(_ call: CAPPluginCall) {
         let isEnabled = MarketingCloudSDK.sharedInstance()
-                .sfmc_pushEnabled() ?? false
+                .sfmc_pushEnabled()
         call.resolve([
             "value": isEnabled
         ])
     }
 
     @objc func enablePush(_ call: CAPPluginCall) {
-        UIApplication.shared.registerForRemoteNotifications()
+        DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
         MarketingCloudSDK.sharedInstance().sfmc_setPushEnabled(true)
         call.resolve()
     }
 
     @objc func disablePush(_ call: CAPPluginCall) {
-        UIApplication.shared.unregisterForRemoteNotifications()
+        DispatchQueue.main.async {
+            UIApplication.shared.unregisterForRemoteNotifications()
+        }
         MarketingCloudSDK.sharedInstance().sfmc_setPushEnabled(false)
         call.resolve()
     }
