@@ -58,7 +58,7 @@ public class SLMMarketingCloud: CAPPlugin {
             let attributes = MarketingCloudSDK.sharedInstance().sfmc_setAttributes(array) ?? [:]
             call.resolve(["value": attributes ])
         } else {
-            call.reject("etAttributes - No attibutes were provided")
+            call.reject("setAttributes - No attibutes were provided")
         }
     }
 

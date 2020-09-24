@@ -60,7 +60,7 @@ class SLMMarketingCloud : Plugin() {
                 res.put("value", sdk.registrationManager.edit().setAttribute(key, value))
                 call.resolve(res)
             } else {
-                call.reject("No key was provided")
+                call.reject("setAttribute - No key was provided")
             }
         }
     }
@@ -89,9 +89,14 @@ class SLMMarketingCloud : Plugin() {
     fun clearAttribute(call: PluginCall) {
         MarketingCloudSdk.requestSdk { sdk ->
             val key = call.getString("key")
-            val res = JSObject()
-            res.put("value", sdk.registrationManager.edit().clearAttribute(key))
-            call.resolve(res)
+
+            if (key.length > 0) {
+                val res = JSObject()
+                res.put("value", sdk.registrationManager.edit().clearAttribute(key))
+                call.resolve(res)
+            } else {
+                call.reject("clearAttribute - No key was provided")
+            }
         }
     }
 
@@ -105,7 +110,7 @@ class SLMMarketingCloud : Plugin() {
                 res.put("value", sdk.registrationManager.edit().addTag(tag))
                 call.resolve(res)
             } else {
-                call.reject("No tag was provided")
+                call.reject("addTag - No tag was provided")
             }
         }
     }
@@ -114,9 +119,14 @@ class SLMMarketingCloud : Plugin() {
     fun removeTag(call: PluginCall) {
         MarketingCloudSdk.requestSdk { sdk ->
             val tag = call.getString("tag")
-            val res = JSObject()
-            res.put("value", sdk.registrationManager.edit().removeTag(tag))
-            call.resolve(res)
+
+            if (tag.length > 0) {
+                val res = JSObject()
+                res.put("value", sdk.registrationManager.edit().removeTag(tag))
+                call.resolve(res)
+            } else {
+                call.reject("removeTag - Tag is empty")
+            }
         }
     }
 
@@ -139,7 +149,7 @@ class SLMMarketingCloud : Plugin() {
                 res.put("value", sdk.registrationManager.edit().setContactKey(contactKey))
                 call.resolve(res)
             } else {
-                call.reject("Contact key is empty")
+                call.reject("setContactKey - Contact key is empty")
             }
         }
     }
